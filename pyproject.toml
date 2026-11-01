@@ -1,0 +1,12 @@
+[project]
+name = "jarvis-core"
+version = "1.0.0"
+description = "Zero-dependency Python stdlib AI Agent Safety Kernel, Self-Evolving Guardian Gate, Hybrid Privacy Router, and B2B Industrial Trade Suite"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.9"
+dependencies = []
+
+[tool.pytest.ini_options]
+testpaths = ["brain", "xiaoshuai/tests"]
+pythonpath = ["brain", "xiaoshuai"]

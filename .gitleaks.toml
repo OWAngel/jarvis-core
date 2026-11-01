@@ -1,0 +1,19 @@
+title = "jarvis-core gitleaks config"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Synthetic dummy token fixtures used in secret-redaction unit tests and module selftests"
+paths = [
+    '''^brain/test_.*\.py$''',
+]
+regexes = [
+    '''sk-[A-Za-z0-9_-]*ABCDEF0123456789[A-Za-z0-9_-]*''',
+    '''sk-ABCDEFGH1234567890XYZ''',
+    '''sk-abcdefghijklmnop1234''',
+    '''wJalrXUtnFEMIabcdef1234''',
+    '''sk-live-secret-token-[A-Za-z0-9_-]+''',
+    '''sk-proj-test-[A-Za-z0-9_-]+''',
+    '''AKIAIOSFODNN7EXAMPLE''',
+]

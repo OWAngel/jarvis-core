@@ -1,0 +1,16 @@
+__pycache__/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+**/.pytest_cache/
+.DS_Store
+*.db
+*.db-wal
+*.db-shm
+*.db.bak-*
+.*_creds.json*
+*_creds.json*
+.*_token.json*
+.env
+output/
+tmp/

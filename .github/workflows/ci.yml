@@ -1,0 +1,47 @@
+name: jarvis-core CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    name: Python ${{ matrix.python-version }} Gate
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.12"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install pytest (test runner only; zero runtime dependencies)
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install pytest
+
+      - name: Gate 1 — Pure Stdlib Syntax Compile Check
+        run: |
+          python -m py_compile brain/*.py xiaoshuai/*.py xiaoshuai/tests/*.py
+
+      - name: Gate 2 — Brain Safety, Privacy, B2B Trade & Reasoning Suites
+        run: |
+          set -e
+          for f in brain/test_*.py; do
+            echo "=== Running $f ==="
+            PYTHONPATH=brain python -m pytest "$f" -q
+          done
+          PYTHONPATH=brain python brain/sanctions_screen.py selftest
+
+      - name: Gate 3 — Xiaoshuai Self-Evolving Guardian Suite
+        run: |
+          PYTHONPATH=xiaoshuai:brain python -m pytest xiaoshuai/tests/ -q
