@@ -9,7 +9,7 @@ on:
 jobs:
   test:
     name: Python ${{ matrix.python-version }} Gate
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, m3-linux]
     strategy:
       fail-fast: false
       matrix:
